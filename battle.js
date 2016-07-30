@@ -28,7 +28,7 @@ function creatGaugeAddValue(data){
 	return guageAddValueStock;
 }
 
-function calculrationGuageFillValue(speed){
+function calculateGuageFillValue(speed){
 	var fillValue = 0;
 	fillValue = speed * 100;
 	if(fillValue <= 0){
@@ -51,7 +51,7 @@ function checkGuage(){
 							document.getElementById('player'+j).disabled = false;
 						}
 						else if( data[i][j].aria.skill){
-							//스킬발동
+							actionSkill(data[i][j], data[i][j].aria.skill, data, stock[i][j]);
 						}
 					}
 					else{
@@ -60,7 +60,7 @@ function checkGuage(){
 							skillCheck(data[i][j], stock[i][j], skill);
 						}
 						else if( data[i][j].aria.skill){
-							//스킬발동
+							actionSkill(data[i][j], data[i][j].aria.skill, data, guageStock);
 						}
 					}
 				}
@@ -95,9 +95,9 @@ function selectSkill(performer){
 }
 
 function checkSkill(performer, gaugeStock, skill){
-	var cost = checkSkillCost(performer, skill);
 
-	function checkSkillCost(perforemr, skill){
+
+	function checkSkillCost(perforemr, skill){ // 스킬 소모 자산 체크
 		var cost = skill.cost 
 		var giveCost = performer.now
 		//{ hp : --, mana : --, stamina : --}
@@ -118,6 +118,16 @@ function checkSkill(performer, gaugeStock, skill){
 			return fail;
 		}
 	}
+
+	function checkSkillAria(performer, stock, skill){
+		if(skill.delay.first != 0){
+			performer.aria.skill = skill;
+			performer.aria.kind = skill.aria.kind;
+			stock -= skill.delay.first;
+			//UI 반영(게이지 감소)
+		}
+	}
+	var cost = checkSkillCost(performer, skill);
 	if( cost[0] == 1 ){
 		performer.now = cost[1];
 	}
@@ -146,15 +156,178 @@ function checkSkill(performer, gaugeStock, skill){
 		return failMessage;
 	}
 
-	checkSkillCast(performer, gaugeStock, skill);
+
 	
-	function checkSkillCast(performer, stock, skill){
-		if(skill.delay.first != 0){
-			performer.aria.skill = skill;
-			performer.aria.kind = skill.aria.kind;
-			stock -= skill.aria.delay;
+	checkSkillCast(performer, gaugeStock, skill);
+
+}
+
+function actionSkill(performer, skill, data, stock){
+
+
+	function checkSkillTargeting(performer, skill, data){
+	//skill.target = [ (0 = self, 1 = friend , 2 = enemy, 3 = all) , ( 0 = individual , 1= multi , 2 = all) ]
+		if( skill.target[0] == 0 ){
+			return [[performer]];
+		}
+		else if( skill.target[0] == 1){
+			return [data[performer.alliy]];
+		}
+		else if( skill.target[0] == 2){
+			var targetData = [];
+			for( var i = 0; i < data.length; i++){
+				if( performer.alliy == 0 ){
+					if( i == 0 ){
+						targetData.push([]);
+						for( var j = 0; j < data[0].length; j++){
+							if( performer.onName != data[0][j].onName ){//무소속인 자기 자신을 제외
+								targetData[0].push(data[0][j]);
+							}
+						}
+					}
+					// 무소속일때 판정
+				}
+				else{
+					targetData.push(data[i]);
+				}
+			}
+		}
+		else if( skill.target[0] == 3){
+			return data;
+		}
+	}
+	
+	function checkRange(performer, skill, target){
+		var rangeIn = [];
+		var range = skill.range * performer.range
+		var rangeCalculate = 0;
+		for( var i = 0 ; i < target.length; i++){
+			for( var j = 0; j < target[i].length; j++){
+				rangeCalcul = Math.sqrt(Math.pow(performer.coordinates.x - target[i][j].coordinates.x,2)+Math.pow(performer.coordinates.y - target[i][j].coordinates.y,2));
+				if( rangeCalcul < range ){
+					rangeIn[i][j] = rangeCalculate / range;
+				}
+			}
+		}
+		return rangeIn;
+	}
+	function selectTarget(skill,target){ //타겟 설정
+		var alliyDice = Math.floor(Math.random()*target.length); // 타겟이 되는 동맹 구분
+		var targetDice = Math.floor(Math.random()*target[alliyDice].length); // 해당 동맹에 속한 대상
+		return target[alliyDice][targetDice];
+	}
+
+	function calculateSkillDamage(performer,skill){
+		return performer.attack * skill.powerValue;
+	}
+	function calculateDefenseDamage(target,damage){
+		return damage-target.defense;
+	}
+	function checkSkillDelay(performer, stock, skill){
+		if(skill.delay.last != 0){
+
+			stock -= skill.delay.last;
 			//UI 반영(게이지 감소)
 		}
 	}
-
+	var target = checkSkillTargeting(performer, skill, data);
+	var range = checkRange(performer, skill, target);
+	
+	if( skill.target[1] == 2){
+		for( var h = 0; h < skill.hitNumber; h++){
+			for( var i = 0; i < target.length; i++){
+				for( var j = 0; j < target[i].length;){
+					var hit = 0;
+					if( range[i][j] =< 1 ){
+						hit = checkHit(performer,skill,target[i][j])
+					}
+					else{
+						hit = 0;
+					} 
+					if( hit >= 1 ){
+						damage = calculateSkillDamage(performer,skill);
+						var criticalDice = Math.random() * 100;
+						if( criticalDice <= performer.critical){
+							damage *= 2;
+						}
+						if(skill.damageType != 0){
+						damage = calculateDefenseDamage(target[i][j],damage);
+						}
+						if(skill.damageType == 0){
+						target[i][j].now.hp += damage;
+						}
+						else if(skill.damageType == 1){
+						target[i][j].now.hp -= damage;
+						}
+						else if(skill.damageType == 2){
+						target[i][j].now.mana -= damage;
+						}
+						else if(skill.damageType == 3){
+						target[i][j].now.stamina -= damage;
+						}
+					}
+				}
+			}
+		}
+	}
+	else if( skill.target[0] != 0 ){
+		for( var h = 0; h < skill.hitNumber; h++){
+			var hitTarget = selectTarget(skill,target);
+			var hit = 0;
+			if( hitTarget =< 1 ){
+				hit = checkHit(performer,skill,hitTarget)
+			}
+			else{
+				hit = 0;
+			} 
+			if( hit >= 1 ){
+				damage = calculateSkillDamage(performer,skill);
+				var criticalDice = Math.random() * 100;
+				if( criticalDice <= performer.critical){
+					damage *= 2;
+				}
+				if(skill.damageType != 0){
+				damage = calculateDefenseDamage(hitTarget,damage);
+				}
+				if(skill.damageType == 0){
+				hitTarget.now.hp += damage;
+				}
+				else if(skill.damageType == 1){
+				hitTarget.now.hp -= damage;
+				}
+				else if(skill.damageType == 2){
+				hitTarget.now.mana -= damage;
+				}
+				else if(skill.damageType == 3){
+				hitTarget.now.stamina -= damage;
+				}
+			}
+		}
+	}
+	else if( skill.target[0] == 0){
+		for( var h = 0; h < skill.hitNumber; h++){
+			damage = calculateSkillDamage(performer,skill);
+			var criticalDice = Math.random() * 100;
+			if( criticalDice <= performer.critical){
+				damage *= 2;
+			}
+			if(skill.damageType != 0){
+			damage = calculateDefenseDamage(target[0][0],damage);
+			}
+			if(skill.damageType == 0){
+			target[0][0].now.hp += damage;
+			}
+			else if(skill.damageType == 1){
+			target[0][0].now.hp -= damage;
+			}
+			else if(skill.damageType == 2){
+			target[0][0].now.mana -= damage;
+			}
+			else if(skill.damageType == 3){
+			target[0][0].now.stamina -= damage;
+			}
+		}
+	}
+	checkSkillDelay(performer, stock, skill);
+	
 }
