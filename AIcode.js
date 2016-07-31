@@ -41,21 +41,71 @@ monster.prototype = {
 
 
 // AI 패턴 캡슐화로 진행
-function AI(t,m){
+function AI(t,mh,rh,atk){
     
     var type = t;
     var myhp = m;
     
-    
     // 몬스터 타입 확인
-    this.checktype = function(t){
+    this.checktype = function(t,mh,rh,atk){
+        
         if(t == 1){
-            console.log("불 type 패턴 시작");    
-            
+            console.log("불 type 패턴 시작");
+            var hpresult = mh/rh * 100;
+            if(20 == hpresult){
+                console.log("속성 공격 치명타");
+                var upatk= atk * 150 / 100;
+                // 적용
+                rh -= upatk
+                
+            }else if(10 == hpresult){
+                console.log("속성 더블 공격");
+                var upatk= atk * 200 / 100;
+                rh -= upatk
+                
+            }else{
+                document.write("일반 공격");
+                rh -= atk
+            }
+        
         }else if(t == 2){
             console.log("풀 type 패턴 시작");
+            
+             var hpresult = mh/rh * 100;
+            if(20 == hpresult){
+                console.log("속성 공격 치명타");
+                var upatk= atk * 150 / 100;
+                // 적용
+                rh -= upatk
+                
+            }else if(10 == hpresult){
+                console.log("속성 더블 공격");
+                var upatk= atk * 200 / 100;
+                rh -= upatk
+                
+            }else{
+                document.write("일반 공격");
+                rh -= atk
+            }
+            
         }else{
-            console.log("물 type 패턴 시작");
+            
+             var hpresult = mh/rh * 100;
+            if(20 == hpresult){
+                console.log("속성 공격 치명타");
+                var upatk= atk * 150 / 100;
+                // 적용
+                rh -= upatk
+                
+            }else if(10 == hpresult){
+                console.log("속성 더블 공격");
+                var upatk= atk * 200 / 100;
+                rh -= upatk
+                
+            }else{
+                document.write("일반 공격");
+                rh -= atk
+            }
         }
         
     }
@@ -72,12 +122,17 @@ function fight(){
 
     // random으로 걸린 몬스터의 이름을 변수에 숫자를 넣어준다
     // 본인
-    var mymon;
-    var myhp = new_monster(mymon).hp;
-    var mytype;
+    var my_type = 1; // 임시적 숫자 대입
+    var my_hp = new_monster(mymon).hp;
+    var my_name = new_monster(enemy_mon).name;
+    var my_hp_result = new_monster(mymon).hp;
     // 상대
-    var monname;
-    var enemyhp = new_monster(monname).hp;
+    var enemy_mon = 2; // 임시적 숫자 대입
+    var enemy_hp = new_monster(enemy_mon).hp;
+    var enemy_mon_name = new_monster(enemy_mon).name;
+    var enemy_hp_result = new_monster(enemy_mon).hp;
+    var enemy_atk = new_monster(enemy_mon).atk;
+    var enemy_type = new_monster(enemy_mon);
     // 싸움 결과
     var result = 0;
     // 데미지 계산 결과
@@ -89,10 +144,10 @@ function fight(){
     if (turn % 2 == 0 ){
         document.write(new_monster(mymon) +"의 턴!");
         document.write(new_monster(mymon) +"의 공격!");
-        damage = (new_monster(monname).hp - new_monster(mymon).atk);
-        document.write(new_monster(monname) +"은"+ damage + "의 데미지를 받았다");
+        damage = (new_monster(enemy_mon).hp - new_monster(mymon).atk);
+        document.write(enemy_mon_name +"은"+ enemy_atk + "의 데미지를 받았다");
         // 적 hp 종합 저장
-        enemyhp -= damage;
+        enemy_hp_result -= damage;
         
         // 화면상 체력 출력 코드 (결합 예정)
         div.innerHTML = output;
@@ -104,17 +159,16 @@ function fight(){
         
     }else{
         
-        document.write(new_monster(monname).name + "의 턴!");
-        
+        document.write(new_monster(enemy_mon).name + "의 턴!");
         document.write(new_monster(mymon) +"의 공격!");
         // AI 공격
-        var AI_active = new AI(mytype, enemyhp);
+        var AI_active = new AI(my_type, enemy_hp, enemy_hp_result, enemy_atk);
         // AI 공격 결과 
         damage = AI_active;
         // 결과 보고
-        document.write(new_monster(mymon) +"은"+ damage + "의 데미지를 받았다");
+        document.write(my_name +"은"+ damage + "의 데미지를 받았다");
         // 적 hp 종합 저장
-        myhp -= damage;
+        my_hp_result -= damage;
         
         div.innerHTML = output;
         
