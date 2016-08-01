@@ -9,7 +9,7 @@ monster.prototype = {
     hp: Number,
     type: Number
   
-}
+};
 
     // 싸울 몬스터 종류(생성)
     var new_monster1 = new monster();
@@ -44,75 +44,73 @@ monster.prototype = {
 function AI(t,mh,rh,atk){
     
     var type = t;
-    var myhp = m;
+    var myhp = mh;
     
     // 몬스터 타입 확인
     this.checktype = function(t,mh,rh,atk){
-        
+        var upatk = 0; 
+        var hpresult = 0; 
         if(t == 1){
             console.log("불 type 패턴 시작");
-            var hpresult = mh/rh * 100;
+            hpresult = mh/rh * 100;
             if(20 == hpresult){
                 console.log("속성 공격 치명타");
-                var upatk= atk * 150 / 100;
+                upatk= atk * 150 / 100;
                 // 적용
-                rh -= upatk
+                rh -= upatk;
                 
             }else if(10 == hpresult){
                 console.log("속성 더블 공격");
-                var upatk= atk * 200 / 100;
-                rh -= upatk
+                upatk = atk * 200 / 100;
+                rh -= upatk;
                 
             }else{
-                document.write("일반 공격");
-                rh -= atk
+                console.log("일반 공격");
+                rh -= atk;
             }
         
         }else if(t == 2){
             console.log("풀 type 패턴 시작");
             
-             var hpresult = mh/rh * 100;
+             hpresult = mh/rh * 100;
+             
             if(20 == hpresult){
                 console.log("속성 공격 치명타");
-                var upatk= atk * 150 / 100;
+                upatk = atk * 150 / 100;
                 // 적용
-                rh -= upatk
+                rh -= upatk;
                 
             }else if(10 == hpresult){
                 console.log("속성 더블 공격");
-                var upatk= atk * 200 / 100;
-                rh -= upatk
+                upatk= atk * 200 / 100;
+                rh -= upatk;
                 
             }else{
-                document.write("일반 공격");
-                rh -= atk
+                console.log("일반 공격");
+                rh -= atk;
             }
             
         }else{
             
-             var hpresult = mh/rh * 100;
+            hpresult = mh/rh * 100;
             if(20 == hpresult){
                 console.log("속성 공격 치명타");
-                var upatk= atk * 150 / 100;
+                upatk = atk * 150 / 100;
                 // 적용
-                rh -= upatk
+                rh -= upatk;
                 
             }else if(10 == hpresult){
                 console.log("속성 더블 공격");
-                var upatk= atk * 200 / 100;
-                rh -= upatk
+                upatk = atk * 200 / 100;
+                rh -= upatk;
                 
             }else{
-                document.write("일반 공격");
-                rh -= atk
+                console.log("일반 공격");
+                rh -= atk;
             }
         }
-        
-    }
-    
-    this.game = a ;
-
-}; // AI
+    };
+} // AI
 
 // 몬스터의 공격 파악후 싸우는 턴 ++ 상승
 function fight(){
@@ -123,34 +121,33 @@ function fight(){
     // random으로 걸린 몬스터의 이름을 변수에 숫자를 넣어준다
     // 본인
     var my_type = 1; // 임시적 숫자 대입
-    var my_hp = new_monster(mymon).hp;
-    var my_name = new_monster(enemy_mon).name;
-    var my_hp_result = new_monster(mymon).hp;
+    var my_hp = new_monster1.hp;
+    var my_name = new_monster1.name;
+    var my_hp_result = new_monster1.hp;
     // 상대
     var enemy_mon = 2; // 임시적 숫자 대입
-    var enemy_hp = new_monster(enemy_mon).hp;
-    var enemy_mon_name = new_monster(enemy_mon).name;
-    var enemy_hp_result = new_monster(enemy_mon).hp;
-    var enemy_atk = new_monster(enemy_mon).atk;
-    var enemy_type = new_monster(enemy_mon);
+    var enemy_hp = new_monster2.hp;
+    var enemy_mon_name = new_monster2.name;
+    var enemy_hp_result = new_monster2.hp;
+    var enemy_atk = new_monster2.atk;
+    var enemy_type = new_monster2.type;
     // 싸움 결과
     var result = 0;
     // 데미지 계산 결과
     var damage = 0;
     // UI 상에 띄워줄 HTML 코드 
-    var output
+    var output;
     
     // 자신의 턴 확인
-    if (turn % 2 == 0 ){
-        document.write(new_monster(mymon) +"의 턴!");
-        document.write(new_monster(mymon) +"의 공격!");
-        damage = (new_monster(enemy_mon).hp - new_monster(mymon).atk);
-        document.write(enemy_mon_name +"은"+ enemy_atk + "의 데미지를 받았다");
+    if (turn % 2 === 0 ){
+        console.log(new_monster1 +"의 턴!");
+        console.log(new_monster1 +"의 공격!");
+        damage = (new_monster2.hp - new_monster1.atk);
+        console.log(enemy_mon_name +"은"+ enemy_atk + "의 데미지를 받았다");
         // 적 hp 종합 저장
         enemy_hp_result -= damage;
         
         // 화면상 체력 출력 코드 (결합 예정)
-        div.innerHTML = output;
         
         // 끝난후 turn 상승
         turn ++ ;
@@ -158,19 +155,17 @@ function fight(){
         
         
     }else{
-        
-        document.write(new_monster(enemy_mon).name + "의 턴!");
-        document.write(new_monster(mymon) +"의 공격!");
+        console.log(new_monster2.name + "의 턴!");
+        console.log(new_monster1 +"의 공격!");
         // AI 공격
         var AI_active = new AI(my_type, enemy_hp, enemy_hp_result, enemy_atk);
         // AI 공격 결과 
         damage = AI_active;
         // 결과 보고
-        document.write(my_name +"은"+ damage + "의 데미지를 받았다");
+        console.log(my_name +"은"+ damage + "의 데미지를 받았다");
         // 적 hp 종합 저장
         my_hp_result -= damage;
         
-        div.innerHTML = output;
         
         turn ++ ;
         
