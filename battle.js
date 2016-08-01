@@ -1,8 +1,33 @@
+var battleCharacter = [
+{ onName : 'Test ally00', range : 1, coordinates : { x : 0, y : 0 },critical : 10, attack : 3, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 150 , ally : 0 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}},
+{ onName : 'Test ally01', range : 1, coordinates : { x : 1, y : 1 },critical : 10, attack : 1, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 15 , ally : 0 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}},
+{ onName : 'Test ally02', range : 1, coordinates : { x : 1, y : 1 },critical : 10, attack : 1, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 19 , ally : 0 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}},
+{ onName : 'Test ally03', range : 1, coordinates : { x : 1, y : 1 },critical : 10, attack : 1, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 18 , ally : 0 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}},
+{ onName : 'Test ally04', range : 1, coordinates : { x : 1, y : 1 },critical : 10, attack : 1, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 17 , ally : 0 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}},
+{ onName : 'Test ally05', range : 1, coordinates : { x : 1, y : 1 },critical : 10, attack : 1, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 16 , ally : 0 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}},
+{ onName : 'Test ally06', range : 1, coordinates : { x : 1, y : 1 },critical : 10, attack : 1, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 13 , ally : 0 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}},
+{ onName : 'Test ally07', range : 1, coordinates : { x : 1, y : 1 },critical : 10, attack : 1, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 12 , ally : 0 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}},
+{ onName : 'Test ally20', range : 1, coordinates : { x : 1, y : 1 },critical : 10, attack : 1, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 11 , ally : 2 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}},
+{ onName : 'Test ally21', range : 1, coordinates : { x : 1, y : 1 },critical : 10, attack : 1, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 9 , ally : 2 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}},
+{ onName : 'Test ally22', range : 1, coordinates : { x : 1, y : 1 },critical : 10, attack : 1, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 8 , ally : 2 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}},
+{ onName : 'Test ally23', range : 1, coordinates : { x : 1, y : 1 },critical : 10, attack : 1, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 7 , ally : 2 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}},
+{ onName : 'Test ally24', range : 1, coordinates : { x : 1, y : 1 },critical : 10, attack : 1, defense : 1, now : {hp : 100, mana : 50, stamina : 50} , speed : 6 , ally : 2 ,aria : {type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, delay : {first : 0, last : 0},cost : {hp : 10, mana : 0, stamina : 0}}}
+
+
+];
+
+var onData = checkOnData();
+var gaugeStock = creatGaugeStock(onData);
+var gaugeAddValueStock = creatGaugeAddValue(onData)
+
 function checkOnData(){
-	var onData = [];
-	for(var i = 0; i < 24; i++){
+	var onData = [[],[],[]];
+	for(var i = 0; i < battleCharacter.length; i++){
 		if(battleCharacter[i] != null){
-			onData[battleCharacter[i].ally][battleCharacter[i].ally.length] = battleCharacter[i];
+			if(!onData[battleCharacter[i]['ally']]){
+				onData[battleCharacter[i]['ally']] = [];
+			}
+			onData[battleCharacter[i]['ally']][onData[battleCharacter[i]['ally']].length] = battleCharacter[i];
 		} //ally  0 = Enemy(none Ally) , 1 = playerCharacter, 2~ = Enemy(Same number Ally)
 	}
 	return onData;
@@ -10,9 +35,16 @@ function checkOnData(){
 
 function creatGaugeStock(data){
 	var gaugeStock = [];
+
 	for(var i = 0; i < data.length; i++){
-		for( var j = 0; j<data[i].length; j++){
-			gaugeStock[i][j] = 0;
+
+		if(!gaugeStock[i]){
+			gaugeStock[i] = [];
+		}
+		if(data[i]){
+			for( var j = 0; j<data[i].length; j++){
+				gaugeStock[i][j] = 0;
+			}
 		}
 	}
 	return gaugeStock;
@@ -21,8 +53,14 @@ function creatGaugeStock(data){
 function creatGaugeAddValue(data){
 	var guageAddValueStock = [];
 	for(var i = 0; i < data.length; i++){
-		for( var j = 0; j<data[i].length; j++){
-			guageAddValueStock[i][j] = calculrationGuageFillValue(data[i][j].speed);
+
+		if(!guageAddValueStock[i]){
+			guageAddValueStock[i] = [];
+		}
+		if(data[i]){
+			for( var j = 0; j<data[i].length; j++){
+				guageAddValueStock[i][j] = calculateGuageFillValue(data[i][j].speed);
+			}
 		}
 	}
 	return guageAddValueStock;
@@ -37,10 +75,10 @@ function calculateGuageFillValue(speed){
 	return fillValue;
 }
 
-function checkGuage(){
-	var stock = guageStock;
-	var fillValue = guageAddValueStock;
-	var data = onData;
+function checkGauge(){
+	let stock = gaugeStock;
+	let fillValue = gaugeAddValueStock;
+	let data = onData;
 	for( var i = 1; i < data.length; ){
 		for( var j = 0; j < data[i].length; j++){
 			if(data[i][j].now.hp > 0){
@@ -57,10 +95,13 @@ function checkGuage(){
 					else{
 						if( !data[i][j].aria.skill ){
 							var skill = selectSkill(data[i][j]);
-							skillCheck(data[i][j], stock[i][j], skill);
+							checkSkill(data[i][j], stock[i][j], skill);
+							if(stock[i][j] >= 10000){
+							actionSkill(data[i][j], data[i][j].aria.skill, data, stock[i][j]);
+							}
 						}
 						else if( data[i][j].aria.skill){
-							actionSkill(data[i][j], data[i][j].aria.skill, data, guageStock);
+							actionSkill(data[i][j], data[i][j].aria.skill, data, stock[i][j]);
 						}
 					}
 				}
@@ -70,23 +111,24 @@ function checkGuage(){
 			else{
 			stock[i][j] = 0 ;
 			}
-			if(i == 0 ){
-				i += 2;
-			}
-			else if( i == 1 ){
-				i -= 1;
-			}
-			else{
-				i += 1;
-			}
 		}
+		if(i == 0 ){
+			i += 2;
+		}
+		else if( i == 1 ){
+			i -= 1;
+		}
+		else{
+			i += 1;
+		}
+		
 
 	}
 }
 
 function selectSkill(performer){
 	if( performer.alliy != 1){
-		var skill = checkPattern(performer.pattern);
+		var skill = performer.skill//checkPattern(performer.pattern);
 		return skill;
 	}
 	else if( performer.alliy == 1){
@@ -120,8 +162,9 @@ function checkSkill(performer, gaugeStock, skill){
 	}
 
 	function checkSkillAria(performer, stock, skill){
-		if(skill.delay.first != 0){
+
 			performer.aria.skill = skill;
+		if(skill.delay.first != 0){
 			performer.aria.kind = skill.aria.kind;
 			stock -= skill.delay.first;
 			//UI 반영(게이지 감소)
@@ -158,7 +201,7 @@ function checkSkill(performer, gaugeStock, skill){
 
 
 	
-	checkSkillCast(performer, gaugeStock, skill);
+	checkSkillAria(performer, gaugeStock, skill);
 
 }
 
@@ -171,13 +214,18 @@ function actionSkill(performer, skill, data, stock){
 			return [[performer]];
 		}
 		else if( skill.target[0] == 1){
-			return [data[performer.alliy]];
+			if( performer.ally != 0){
+				return [data[performer.alliy]];
+			}
+			else{
+				return [[performer]]
+			}
 		}
 		else if( skill.target[0] == 2){
 			var targetData = [];
 			for( var i = 0; i < data.length; i++){
-				if( performer.alliy == 0 ){
-					if( i == 0 ){
+				if( i == 0 ){
+					if( performer.ally == 0 ){
 						targetData.push([]);
 						for( var j = 0; j < data[0].length; j++){
 							if( performer.onName != data[0][j].onName ){//무소속인 자기 자신을 제외
@@ -191,6 +239,7 @@ function actionSkill(performer, skill, data, stock){
 					targetData.push(data[i]);
 				}
 			}
+			return targetData;
 		}
 		else if( skill.target[0] == 3){
 			return data;
@@ -202,9 +251,12 @@ function actionSkill(performer, skill, data, stock){
 		var range = skill.range * performer.range
 		var rangeCalculate = 0;
 		for( var i = 0 ; i < target.length; i++){
+		if(!rangeIn[i]){
+			rangeIn[i] = [];
+		}
 			for( var j = 0; j < target[i].length; j++){
-				rangeCalcul = Math.sqrt(Math.pow(performer.coordinates.x - target[i][j].coordinates.x,2)+Math.pow(performer.coordinates.y - target[i][j].coordinates.y,2));
-				if( rangeCalcul < range ){
+				rangeCalculate = Math.sqrt(Math.pow(performer.coordinates.x - target[i][j].coordinates.x,2)+Math.pow(performer.coordinates.y - target[i][j].coordinates.y,2));
+				if( rangeCalculate <= range ){
 					rangeIn[i][j] = rangeCalculate / range;
 				}
 			}
@@ -212,9 +264,9 @@ function actionSkill(performer, skill, data, stock){
 		return rangeIn;
 	}
 	function selectTarget(skill,target){ //타겟 설정
-		var alliyDice = Math.floor(Math.random()*target.length); // 타겟이 되는 동맹 구분
-		var targetDice = Math.floor(Math.random()*target[alliyDice].length); // 해당 동맹에 속한 대상
-		return target[alliyDice][targetDice];
+		var allyDice = Math.floor(Math.random()*target.length); // 타겟이 되는 동맹 구분
+		var targetDice = Math.floor(Math.random()*target[allyDice].length); // 해당 동맹에 속한 대상
+		return [target[allyDice][targetDice],[allyDice,targetDice]];
 	}
 
 	function calculateSkillDamage(performer,skill){
@@ -224,11 +276,10 @@ function actionSkill(performer, skill, data, stock){
 		return damage-target.defense;
 	}
 	function checkSkillDelay(performer, stock, skill){
-		if(skill.delay.last != 0){
 
-			stock -= skill.delay.last;
+			stock = skill.delay.last;
 			//UI 반영(게이지 감소)
-		}
+		
 	}
 	var target = checkSkillTargeting(performer, skill, data);
 	var range = checkRange(performer, skill, target);
@@ -238,7 +289,7 @@ function actionSkill(performer, skill, data, stock){
 			for( var i = 0; i < target.length; i++){
 				for( var j = 0; j < target[i].length;){
 					var hit = 0;
-					if( range[i][j] =< 1 ){
+					if( range[i][j] <= 1 ){
 						hit = checkHit(performer,skill,target[i][j])
 					}
 					else{
@@ -274,8 +325,8 @@ function actionSkill(performer, skill, data, stock){
 		for( var h = 0; h < skill.hitNumber; h++){
 			var hitTarget = selectTarget(skill,target);
 			var hit = 0;
-			if( hitTarget =< 1 ){
-				hit = checkHit(performer,skill,hitTarget)
+			if( range[hitTarget[1][0]][hitTarget[1][1]] <= 1 ){ // 거리판정
+				hit = 1//checkHit(performer,skill,hitTarget[0])
 			}
 			else{
 				hit = 0;
@@ -287,19 +338,19 @@ function actionSkill(performer, skill, data, stock){
 					damage *= 2;
 				}
 				if(skill.damageType != 0){
-				damage = calculateDefenseDamage(hitTarget,damage);
+				damage = calculateDefenseDamage(hitTarget[0],damage);
 				}
 				if(skill.damageType == 0){
-				hitTarget.now.hp += damage;
+				hitTarget[0].now.hp += damage;
 				}
 				else if(skill.damageType == 1){
-				hitTarget.now.hp -= damage;
+				hitTarget[0].now.hp -= damage;
 				}
 				else if(skill.damageType == 2){
-				hitTarget.now.mana -= damage;
+				hitTarget[0].now.mana -= damage;
 				}
 				else if(skill.damageType == 3){
-				hitTarget.now.stamina -= damage;
+				hitTarget[0].now.stamina -= damage;
 				}
 			}
 		}
