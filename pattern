@@ -1,0 +1,38 @@
+pattern 
+
+	code : 7자리로 구성된 영어(대문자) 숫자 복합
+		앞의 2자리 상황을 나타내는 대표하는 것
+		ex)	상황		코드	상황 		코드
+			MaxHp		MH	NowHp		NH
+			MaxMana		MM	NowMana		NM
+			MaxStamina	MS	NowStamina	NS
+			Death		DE	Survivor	SU
+			Summon		SM	MagicCircle	MC
+			StackValue	SV	AriaDelay	AD
+			Range In	RI	Range Out 	RO
+			CrowdControl	CC	LineType(대열)	LT
+			Stats		ST	Other		OT
+
+		세번째 자리 상황 판단을 위한 대상을 나타냄
+		0 = 자신		1 = 아군
+		2 = 적군		3 = 전체 
+
+		네번째 자리 상황 판단을 위한 수치의 값 종류를 나타냄
+		0 = 수치		1 = %
+
+		다섯번째 자리 상황 판단을 위한 수치의 판단 방식을 나타냄
+		0 = 동일		1 = 이상		2 = 이하
+
+		마지막 2자리는 앞의 2자리에 대한 상황 나열을 위한 것
+		01 부터 시작함
+	
+
+	[패턴 코드 , 수치 값 , 스킬 코드] 순의 배열로 패턴을 구성
+			수치값이 비어있을 때는 0으로 인식
+			스킬코드가 누락되어있을 때는 행동 실패를 출력
+
+	예시
+	[[NS00101,10 , 110001][ OT00000 , 0 , 100000 ]]
+	자신의 스테미나가 10 이상 일때 Bash(가상)
+	반드시 Attack(기본공격)
+	
