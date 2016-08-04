@@ -1,0 +1,86 @@
+#skill
+
+	!은 반드시 있어야할 것 (대상)은 해당 대상이 존재시 있어야할 것
+	
+	!code : 호출숫자 6자리
+		앞의 2자리는 사용 직업 코드를 의미, 뒤의 4자리는 구분용
+
+	!name : 이름
+		출력될 이름
+
+	!target : [ -, - ]
+		[ (0 = self, 1 = friend , 2 = enemy, 3 = all) , ( 0 = individual , 1= multi , 2 = all) ] 를 의미
+			개인	아군		적	전체		1인		다수	전체
+
+	!delay : [ - , - ] or { first : - , last : - }
+		수치 미입력시 0, 0로 인식 first 0의 경우 선 딜레이 없음
+					       last 0의 경우 후 딜레이 없음( 게이지 최대값 + last 값 이 사용후 게이지 감소 값)
+	delayType :  cast 또는 charge 2가지
+	(delay!=[0,0])	delay 내부 수치 가 존재 할 경우애만 존재
+
+	!skillType : combat 또는 support 2가지
+		combat은 피해를 입히는 기술
+		support는 회복하는 기술
+		부가 효과는 사용자가 아닌 스킬 대상만 적용됨
+
+	!range : 스킬의 사거리
+		캐릭터의 사거리와의 곱연산
+	
+	power : [[ 연산값 , 계수 , 연산방식] ,[…]…]
+		연산값 = 대상이 되는 값 ex ( physicalAttack , magicAttack , strength , speed …
+		계수 = 곱연산 값( 100 = 1 , 150 = 1.5)
+		연산방식 = [1] 부터 존재하며, 바로 앞에 값에 대한 곱연산인가 합연산인가 판단
+
+	hitCount : 타격횟수
+	!(power)
+	defence : 방어종류
+	!(skillType = combat)	타겟의 피해 계산시 적용하는 값
+		0 = None (방어 무시) , 1 = Physical (물리) , 2 = Magic (마법)
+	
+	invalid : 관통 여부
+		전위의 지킨다 옵션을 적용할 수 있는가의 판단 true 일때 막을 수 없음
+	!(skillType = combat)
+	specialTarget : 타겟에 대한 조건
+			ex) CastDisturb = casting중인 대상만 적용
+	
+	highestTarget : 우선순위를 가지는 타겟
+			ex) 회복 계통 기술의 경우 낮은 체력을 우선적으로 타겟으로 삼는 경우
+
+	element : 스킬 속성
+		미 존재시 무속성 및 캐릭터의 속성을 따라감. 존재시 해당 속성으로 판정함
+		다중 속성의 경우 %비율로 입력함
+
+	addEffect : 스킬의 적중 대상에 대한 부가효과
+		접두 Up과 Down은 %변화로 인식함
+		     Plus와 Minus는 수치 증감으로 인식함
+		접미 변화 대상을 지정함
+			ex) DownMaxHp = 10% // 최대체력 10%감소
+			    UpGauge = 5% // 잔여 게이지의 5% 상승
+			    MinusDelay = 150 // 딜레이를 150만큼 미룸
+
+	exp : 출력시 나오는 설명
+
+
+*현 상태의 예시) 
+
+	code : 100000
+	name : 'Attack'
+	target : [ 2, 1 ] // enemy - individual
+	skillType : combat  // 공격기술
+	range : 1 // 사정거리 1
+	hitCount : 1 // 1회 타격
+	power : [['physicalAttack' , 100]] // 물리공격력의 100%
+	defence : 1 // 방어 형태 물리
+	exp : '기본공격'
+
+
+	code : 200010 
+	name : 'QuickHeal'
+	target : [ 1, 2 ] // friend - multi
+	delay : [ 3000 , -3000 ] // 3000의 선딜레이후 발동 , 발동후 7000의 딜레이만큼 감소
+	delayType : cast // 영창
+	skillType : support  // 회복기술
+	range : 0.8 // 사정거리 0.8
+	hitCount : 3 // 횟수 3
+	power : [['magicAttack' , 110]] //마법공격력의 110%
+	highestTarget : LowestNowHp // 현재  체력이 가장 낮은 것부터 판정함
