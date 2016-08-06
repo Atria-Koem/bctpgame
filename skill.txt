@@ -28,6 +28,7 @@
 	
 	power : [[ 연산값 , 계수 , 연산방식] ,[…]…]
 		연산값 = 대상이 되는 값 ex ( physicalAttack , magicAttack , strength , speed …
+		첫 연산값은 물리공격력 또는 마법공격력에 한정 함
 		계수 = 곱연산 값( 100 = 1 , 150 = 1.5)
 		연산방식 = [1] 부터 존재하며, 바로 앞에 값에 대한 곱연산인가 합연산인가 판단
 
@@ -40,15 +41,18 @@
 	invalid : 관통 여부
 		전위의 지킨다 옵션을 적용할 수 있는가의 판단 true 일때 막을 수 없음
 	!(skillType = combat)
+	
 	specialTarget : 타겟에 대한 조건
 			ex) CastDisturb = casting중인 대상만 적용
 	
 	highestTarget : 우선순위를 가지는 타겟
 			ex) 회복 계통 기술의 경우 낮은 체력을 우선적으로 타겟으로 삼는 경우
 
-	element : 스킬 속성
-		미 존재시 무속성 및 캐릭터의 속성을 따라감. 존재시 해당 속성으로 판정함
+	element+(속성이름) :  스킬 속성
+		미 존재시 무속성 및 캐릭터의 속성을 따라감
+		단일 존재시 해당 속성으로 판정함
 		다중 속성의 경우 %비율로 입력함
+		해당 값의 합이 100%가 넘어갈 수 있음
 
 	addEffect : 스킬의 적중 대상에 대한 부가효과
 		접두 Up과 Down은 %변화로 인식함
@@ -59,7 +63,8 @@
 			    MinusDelay = 150 // 딜레이를 150만큼 미룸
 
 	exp : 출력시 나오는 설명
-
+	
+	limit : 해당 스킬을 사용하기 위한 장비 제한
 
 *현 상태의 예시) 
 
@@ -73,6 +78,8 @@
 	defence : 1 // 방어 형태 물리
 	exp : '기본공격'
 
+사용자에게 출력 양식 예상)
+Attack / enemy - individual / 100% * 1(붉은색) / Range : 1 /  Physical / Combat
 
 	code : 200010 
 	name : 'QuickHeal'
@@ -84,3 +91,5 @@
 	hitCount : 3 // 횟수 3
 	power : [['magicAttack' , 110]] //마법공격력의 110%
 	highestTarget : LowestNowHp // 현재  체력이 가장 낮은 것부터 판정함
+사용자에게 출력 양식 예상)
+QuickHeal / friend - multi / 110% * 3 (초록색) / (3000 : -3000) / Range : 0.8 / Support / Casting
