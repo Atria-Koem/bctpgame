@@ -1,46 +1,61 @@
 var battleCharacter = [
-{ onName : 'Test ally00', 
-  range : 1, 
-  hit : 100, 
-  dodge : 10, 
-  coordinates : { x : 0, y : 0 },
-  critical : 10, 
-  attack : 4, 
-  defense : 0, 
+{ onName : 'newObject', 
   max : {hp : 100, mana : 1000, stamina : 1000} ,
   now : {hp : 100, mana : 1000, stamina : 1000} , 
-  speed : 20 , 
+  stats : { str : 10, int : 10, dex : 10, spd : 10, luk : 10 },
+  aria : { type : 0, skill : 0 },
+  rate : { hit : 100, dodge : 10, critical : 10},
+  baseOption : { attackPhysical : 5, attackMagic : 10, defensePhysicalPercent : 10, defensePhysicalNumber : 5, defenseMagicPercent : 0, defenseMagicNumber : 0},
+  range : 1, 
+  coordinates : { x : 0, y : 0 },
+  critical : 10, 
   ally : 0 ,
-  aria : {kind : 0, type : 0,skill : 0}, 
-  pattern : [['NS00101',10, 100001],['OT00000' , 0 , 100000 ]] ,
-  skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1, aria : {delay : {first : 0, last : 0},kind : 0},cost : {hp : 0, mana : 0, stamina : 5}}},
-{ onName : 'Test ally01', range : 3, hit : 100, dodge : 10,pattern : [['NM00101',10, 200000],['OT00000' , 0 , 100000 ]] , coordinates :{ x : 1, y : 0 },critical : 10, attack : 2, defense : 0, now : {hp : 100, mana : 1000, stamina : 1000} , speed : 10 , ally : 0 ,aria : {kind : 0, type : 0,skill : 0}},
-{ onName : 'Test ally02', range : 1, hit : 100, dodge : 10,pattern : [['NS00101',10, 100001],['OT00000' , 0 , 100000 ]] , coordinates :{ x : 1, y : 1 },critical : 10, attack : 2, defense : 0, now : {hp : 100, mana : 1000, stamina : 1000} , speed : 19 , ally : 0 ,aria : {kind : 0, type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1,  aria : {delay : {first : 0, last : 0},kind : 0},cost : {hp : 0, mana : 0, stamina : 5}}},
-{ onName : 'Test ally03', range : 1, hit : 100, dodge : 10,pattern : [['OT00000' , 0 , 100000 ]] , coordinates :{ x : 0, y : 1 },critical : 10, attack : 2, defense : 0, now : {hp : 100, mana : 1000, stamina : 1000} , speed : 18 , ally : 0 ,aria : {kind : 0, type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1,  aria : {delay : {first : 0, last : 0},kind : 0},cost : {hp : 0, mana : 0, stamina : 5}}},
-{ onName : 'Test ally04', range : 1, hit : 100, dodge : 10,pattern : [['OT00000' , 0 , 100000 ]] , coordinates :{ x : -1, y : 1 },critical : 10, attack : 2, defense : 0, now : {hp : 100, mana : 1000, stamina : 1000} , speed : 17 , ally : 0 ,aria : {kind : 0, type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1,  aria : {delay : {first : 0, last : 0},kind : 0},cost : {hp : 0, mana : 0, stamina : 5}}},
-{ onName : 'Test ally05', range : 1, hit : 100, dodge : 10,pattern : [['OT00000' , 0 , 100000 ]] , coordinates :{ x : -1, y : -1 },critical : 10, attack : 2, defense : 0, now : {hp : 100, mana : 1000, stamina : 1000} , speed : 16 , ally : 0 ,aria : {kind : 0, type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1,  aria : {delay : {first : 0, last : 0},kind : 0},cost : {hp : 0, mana : 0, stamina : 5}}},
-{ onName : 'Test ally06', range : 2, hit : 100, dodge : 10,pattern : [['OT00000' , 0 , 100000 ]] , coordinates :{ x : -1, y : 0 },critical : 10, attack : 2, defense : 0, now : {hp : 100, mana : 1000, stamina : 1000} , speed : 13 , ally : 0 ,aria : {kind : 0, type : 0,skill : 0},skill : { damageType : 1, hitNumber : 2, range : 2, target : [2,0], powerValue : 1,  aria : {delay : {first : 1000, last : 0},kind : 0},cost : {hp : 0, mana : 0, stamina : 10}}},
-{ onName : 'Test ally07', range : 1, hit : 100, dodge : 10,pattern : [['OT00000' , 0 , 100000 ]] , coordinates :{ x : 0, y : -1 },critical : 10, attack : 2, defense : 0, now : {hp : 100, mana : 1000, stamina : 1000} , speed : 12 , ally : 0 ,aria : {kind : 0, type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1,  aria : {delay : {first : 0, last : 0},kind : 0},cost : {hp : 0, mana : 0, stamina : 5}}},
-{ onName : 'Test ally20', range : 1, hit : 100, dodge : 10,pattern : [['OT00000' , 0 , 100000 ]] , coordinates :{ x : 1, y : -1 },critical : 10, attack : 2, defense : 0, now : {hp : 100, mana : 1000, stamina : 1000} , speed : 11 , ally : 2 ,aria : {kind : 0, type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1,  aria : {delay : {first : 0, last : 0},kind : 0},cost : {hp : 0, mana : 0, stamina : 5}}},
-{ onName : 'Test ally21', range : 1, hit : 100, dodge : 10,pattern : [['OT00000' , 0 , 100000 ]] , coordinates :{ x : 1, y : 2 },critical : 10, attack : 2, defense : 0, now : {hp : 100, mana : 1000, stamina : 1000} , speed : 9 , ally : 2 ,aria : {kind : 0, type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1,  aria : {delay : {first : 0, last : 0},kind : 0},cost : {hp : 0, mana : 0, stamina : 5}}},
-{ onName : 'Test ally22', range : 1, hit : 100, dodge : 10,pattern : [['OT00000' , 0 , 100000 ]] , coordinates :{ x : 2, y : 1 },critical : 10, attack : 2, defense : 0, now : {hp : 100, mana : 1000, stamina : 1000} , speed : 8 , ally : 2 ,aria : {kind : 0, type : 0,skill : 0},skill : { damageType : 1, hitNumber : 6, range : 2, target : [2,1], powerValue : 1.5,  aria : {delay : {first : 1000, last : 0},kind : 0},cost : {hp : 0, mana : 0, stamina : 10}}},
-{ onName : 'Test ally23', range : 1, hit : 100, dodge : 10,pattern : [['OT00000' , 0 , 100000 ]] , coordinates :{ x : 2, y : -1 },critical : 10, attack : 2, defense : 0, now : {hp : 100, mana : 1000, stamina : 1000} , speed : 7 , ally : 2 ,aria : {kind : 0, type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1,  aria : {delay : {first : 0, last : 0},kind : 0},cost : {hp : 0, mana : 0, stamina : 5}}},
-{ onName : 'Test ally24', range : 1, hit : 100, dodge : 10,pattern : [['NS00101',10, 100001],['OT00000' , 0 , 100000 ]] , coordinates :{ x : -1, y : 2 },critical : 10, attack : 2, defense : 0, now : {hp : 100, mana : 1000, stamina : 1000} , speed : 6 , ally : 2 ,aria : {kind : 0, type : 0,skill : 0},skill : { damageType : 1, hitNumber : 1, range : 2, target : [2,0], powerValue : 1,  aria : {delay : {first : 100, last : 9900},kind : 0},cost : {hp : 0, mana : 0, stamina : 5}}}
- 
+  pattern : [['NS00101',10, 100001],['OT00000' , 0 , 100000 ]] },
+{ onName : 'newOption', 
+  max : {hp : 100, mana : 1000, stamina : 1000} ,
+  now : {hp : 100, mana : 1000, stamina : 1000} , 
+  stats : { str : 10, int : 10, dex : 10, spd : 10, luk : 10 },
+  aria : { type : 0, skill : 0 },
+  rate : { hit : 100, dodge : 10, critical : 10},
+  baseOption : { attackPhysical : 10, attackMagic : 10, defensePhysicalPercent : 10, defensePhysicalNumber : 0, defenseMagicPercent : 0, defenseMagicNumber : 0},
+  range : 1, 
+  coordinates : { x : 0, y : 0 },
+  critical : 10, 
+  ally : 0 ,
+  pattern : [['OT00000' , 0 , 100000 ]]
+ }
+
  
 ];
 var skillData = { 
-100000 : { 
-  name : 'Attack',
-  damageType : 1, 
-  hitNumber : 1,
-  range : 1, 
-  target : [2,0],
-  powerValue : 1, 
-  aria : {delay : {first : 0, last : 0},kind : 0},
-  cost : {hp : 0, mana : 0, stamina : 0}},
-100001 : {name : 'TripleHit', damageType : 1, hitNumber : 3, range : 3, target : [2,0], powerValue : 3, aria : {delay : {first : 1000, last : -1000},kind : 'Charge'},cost : {hp : 0, mana : 0, stamina : 10}},
-200000 : {name : 'Earthquake', damageType : 1, hitNumber : 4, range : 20, target : [2,2], powerValue : 10,  aria : {delay : {first : 5000, last : -5000},kind : 'Cast'},cost : {hp : 0, mana : 5, stamina : 0}}
+100000 : {
+ 	code : 100000,
+  	name : 'Attack',
+  	target : [ 2, 0 ], // enemy - individual
+ 	cost : { hp : 0 , mana : 0 , stamina : 0 },
+  	skillType : 'combat',  // 공격기술
+  	range : 1 ,// 사정거리 1
+  	hitCount : 1, // 1회 타격
+  	power : [['attackPhysical' , 100]], // 물리공격력의 100%
+  	defence : 0, // 방어 형태 물리
+  	exp : '기본공격'
+},
+100001 : {
+ 	code : 100001,
+  	name : 'TripleHit',
+  	target : [ 2, 0 ],
+ 	cost : { hp : 0 , mana : 0 , stamina : 5 },
+	delay : {first : 3000, last : 5000},
+	delayType : 'Charge',
+  	skillType : 'combat',  
+  	range : 1.5 ,
+  	hitCount : 3, // 1회 타격
+  	power : [['attackPhysical' , 110]], // 물리공격력의 100%
+  	defence : 1, // 방어 형태 물리
+  	exp : '기본공격'
+
+}
+//200000 : {name : 'Earthquake', damageType : 1, hitCount : 4, range : 20, target : [2,2], powerValue : 10,  aria : {delay : {first : 8000, last : 15000},type : 'Cast'},cost : {hp : 0, mana : 5, stamina : 0}}
 }
  
 var onData = checkOnData();
@@ -72,6 +87,12 @@ function creatGaugeStock(data){ //onData에 비례한 게이지 스톡 생성
 		if(data[i]){
 			for( var j = 0; j<data[i].length; j++){
 				gaugeStock[i][j] = 0;
+				if(!document.getElementById('Ally'+data[i][j].ally)){
+				var creatAlly =  document.getElementById('FieldBattle');
+				var div = document.createElement('div')
+				div.id = 'Ally'+data[i][j].ally;
+				creatAlly.appendChild(div)
+				}
 				var stock = document.getElementById('Ally'+data[i][j].ally); // 테스트용 게이지 UI 생성
 				var table = document.createElement('table');
 				var tr1 = document.createElement('tr');
@@ -86,8 +107,6 @@ function creatGaugeStock(data){ //onData에 비례한 게이지 스톡 생성
 				tr1.appendChild(th);
 				tr2.appendChild(td);
 				td.style.width = td.parentNode.offsetWidth*Math.floor(gaugeStock[i][j]/10000*90)/100+'px';
-
-
 				table.appendChild(tr1)
 				table.appendChild(tr2)
 				stock.appendChild(table);
@@ -106,7 +125,7 @@ function creatGaugeAddValue(data){ //onData에 비례한 게이지 증가량 생
 		}
 		if(data[i]){
 			for( var j = 0; j<data[i].length; j++){
-				guageAddValueStock[i][j] = calculateGuageFillValue(data[i][j].speed);
+				guageAddValueStock[i][j] = calculateGuageFillValue(data[i][j].stats.spd);
 			}
 		}
 	}
@@ -150,15 +169,15 @@ function checkGauge(){ //게이지 수치를 판정
 							stock[i][j] =  checkSkill(data[i][j], stock[i][j], skill); //변경 필요사항 코스트가 부족여부 상관없이 자동으로 사용됨
  				changeUi.innerText = Math.floor(stock[i][j]/10000*1000)/10+'%'
 				changeUi.style.width = Math.floor(stock[i][j]/10000*900)/10+'%'; 
-				if(data[i][j].aria.kind){
-				document.getElementById('name'+i+j).innerText = data[i][j].onName+'('+data[i][j].aria.kind+')'; // 딜레이 종류 표시용
+				if(data[i][j].aria.type){
+				document.getElementById('name'+i+j).innerText = data[i][j].onName+'('+data[i][j].aria.type+')';
 				}
 							if(stock[i][j] >= 10000){
 				console.log(data[i][j].onName + "은(는)" + data[i][j].aria.skill.name + "을(를) 사용했다.")
 								stock[i][j] = actionSkill(data[i][j], data[i][j].aria.skill, data, stock[i][j]);
  				changeUi.innerText = Math.floor(stock[i][j]/10000*1000)/10+'%'
 				changeUi.style.width = Math.floor(stock[i][j]/10000*900)/10+'%'; 
-
+ 
 							}
 						}
 						else if( data[i][j].aria.skill){
@@ -195,19 +214,19 @@ function checkGauge(){ //게이지 수치를 판정
  
 function selectSkill(performer){ //입력된 패턴에 따른 자동 행동
 	if( performer.alliy != 1){
-		var skill = checkParttern(performer,performer.pattern);//performer.skill
+		var skill = checkParttern(performer,performer.pattern);
 		return skill;
 	}
 	else if( performer.alliy == 1){
 		//버튼 입력
 	}
 }
-
+ 
 function checkParttern(performer,pattern){ // 패턴 확인
 	
 	function rulePattern(performer,pattern){ // 패턴 정보 확인후 판정 개선 필요
  
-	switch(pattern[0]){ // 패턴체크
+	switch(pattern[0]){
 	case "OT00000" : 
 	return pattern[2];
 	break;
@@ -266,9 +285,9 @@ function checkSkill(performer, gaugeStock, skill){ //스킬 소모,게이지 감
 	function checkSkillAria(performer, stock, skill){ // 선 딜레이 반영, 영창 종류(차지 캐스팅) 구분
  
 			performer.aria.skill = skill;
-		if(skill.aria.delay.first != 0){
-			performer.aria.kind = skill.aria.kind;
-			stock -= skill.aria.delay.first;
+		if(skill.delay){
+			performer.aria.type = skill.delayType;
+			stock -= skill.delay.first;
 			//UI 반영(게이지 감소)
  
 		}
@@ -305,7 +324,8 @@ function checkSkill(performer, gaugeStock, skill){ //스킬 소모,게이지 감
  
  
 	if(cost[0] == 1){
-	gaugeStock = checkSkillAria(performer, gaugeStock, skill);
+
+			gaugeStock = checkSkillAria(performer, gaugeStock, skill);
 	}
 	else{
 	gaugeStock = 0;
@@ -319,39 +339,43 @@ function actionSkill(performer, skill, data, stock){ // 스킬 작동
  
 	function checkSkillTargeting(performer, skill, data){ // 스킬의 타겟을 선택하는 것, 스킬 별 타겟 판정은 아래의 주석과 같음
 	//skill.target = [ (0 = self, 1 = friend , 2 = enemy, 3 = all) , ( 0 = individual , 1= multi , 2 = all) ]
+			var targetData = [];
 		if( skill.target[0] == 0 ){
-			return [[performer]];
+			targetData = [[performer]]
+			return targetData;
 		}
 		else if( skill.target[0] == 1){
 			if( performer.ally != 0){//소속이 있는 경우 자신을 포함한 같은 소속원을 넣음
-				return [data[performer.alliy]];
+			targetData = [data[performer.alliy]]
+				return targetData ;
 			}
 			else{//소속이 없는 경우 자신만 넣음
-				return [[performer]]
+				targetData = [[performer]]
+				return targetData;
 			}
 		}
 		else if( skill.target[0] == 2){
-			var targetData = [];
+
 			for( var i = 0; i < data.length; i++){
-				if( i == 0 ){
-					if( performer.ally == 0 ){
 						targetData.push([]);
-						for( var j = 0; j < data[0].length; j++){
-							if( performer.onName != data[0][j].onName ){//무소속인 자기 자신을 제외
-								targetData[0].push(data[0][j]);
+						for( var j = 0; j < data[i].length; j++){
+							if( performer.onName != data[i][j].onName ){//무소속인 자기 자신을 제외
+								targetData[i].push(data[i][j]);
 							}
 						}
 					}
 					// 무소속일때 판정
-				}
-				else{
-					targetData.push(data[i]);
-				}
-			}
+				
+
+			
 			return targetData;
 		}
 		else if( skill.target[0] == 3){
-			return data;
+
+			for( var i = 0; i < data.length; i++){
+					targetData.push(data[i]);
+			}
+			return targetData;
 		}
 	}
 	
@@ -373,15 +397,33 @@ function actionSkill(performer, skill, data, stock){ // 스킬 작동
 		return rangeIn;
 	}
 	function selectTarget(skill,target){ //타겟 설정
-		do{
-		var allyDice = Math.floor(Math.random()*target.length); // 타겟이 되는 동맹 구분
-		var targetDice = Math.floor(Math.random()*target[allyDice].length); // 해당 동맹에 속한 대상
-		}while(!target[allyDice][targetDice]||target[allyDice][targetDice].now.hp <= 0) // 빈 대상이거나 죽은 경우 다시 굴림
-		return [target[allyDice][targetDice],[allyDice,targetDice]];
+		let allyDice = 0,
+		    targetDice = 0,
+		    activeCheck = 0;
+		while(target.length > 0){
+
+
+		
+		 allyDice = Math.floor(Math.random()*target.length); // 타겟이 되는 동맹 구분
+		 targetDice = Math.floor(Math.random()*target[allyDice].length); // 해당 동맹에 속한 대상
+		if(target[allyDice].length == 0){
+		target.splice(allyDice,1);
+		}
+
+		else if(target[allyDice][targetDice].now.hp <= 0){
+		target[allyDice].splice(targetDice,1);
+		
+		}
+		
+		else if(target[allyDice][targetDice].now.hp > 0){
+			return [target[allyDice][targetDice],[allyDice,targetDice]];
+		}
+		} // 빈 대상이거나 죽은 경우 다시 굴림
+
 	}
 	function checkHit(performer,skill,target){
-		let hitRate = performer.hit, //명중률(현재는 단순 공식 추가 필요)
-		    dodgeRate = target.dodge; // 회피율(현재는 ~ 이하 동일)
+		let hitRate = performer.rate.hit, //명중률(현재는 단순 공식 추가 필요)
+		    dodgeRate = target.rate.dodge; // 회피율(현재는 ~ 이하 동일)
 	
 		if(Math.random()*100 <= hitRate){
 			if(Math.random()*100 <= dodgeRate){
@@ -393,17 +435,48 @@ function actionSkill(performer, skill, data, stock){ // 스킬 작동
 	}
 	function calculateSkillDamage(performer,skill){ // 속성 및 위력체크 ( 속성 미구현)
 		//[performer의 공격속성값을 따로 판정할 것인가? skill의 속성값만 판정할 것인가?]
-		return performer.attack * skill.powerValue;
+		const power = skill.power;
+		let damage = 0;
+		for(let i = 0; i<power.length; i++){
+		powerSubject = performer.baseOption[power[i][0]]
+		powerValue = power[i][1]
+		if(i >= 1){
+		}
+		else{
+		damage += powerSubject*powerValue / 100;
+		}
+		}
+		return [damage,skill.defence];
 	}
 	function calculateDefenseDamage(target,damage){ // 속성 및 방어력 체크 ( 속성 미구현)
 		//target.element의 방어 값은 어떤식으로 할 것 인가? 
 		//무효 흡수 내성 개념인가 상성 개념인가?
 		// 0    1     2~ ?
-		return damage-target.defense;
+		if(damage[1] == 0){
+		return damage[0]
+		}
+		else{
+		let damageCalculate = 0;
+			if(damage[1] == 1){
+				damageCalculate = damage[0]*(100-target.baseOption.defensePhysicalPercent)/100-target.baseOption.defensePhysicalNumber;
+				if(damageCalculate < damage[0] * 0.1){
+					damageCalculate = damage[0] * 0.1;
+				}
+			}
+			else if(damage[1] == 2){
+				damageCalculate = damage[0]*(100-target.baseOption.defenseMagicPercent)/100-target.baseOption.defenseMagicNumber;
+				if(damageCalculate < damage[0] * 0.1){
+					damageCalculate = damage[0] * 0.1;
+				}
+			}
+		return damageCalculate
+		}
 	}
 	function checkSkillDelay(performer, stock, skill){ // 스킬 사용후 딜레이 반영
- 
-			stock = skill.aria.delay.last;
+ 			stock -= 10000
+			if(skill.delay){
+			stock -= skill.delay.last;
+			}
 			//UI 반영(게이지 감소)
 			return stock;
 		
@@ -412,7 +485,7 @@ function actionSkill(performer, skill, data, stock){ // 스킬 작동
 	var range = checkRange(performer, skill, target);
 	
 	if( skill.target[1] == 2){
-		for( var h = 0; h < skill.hitNumber; h++){
+		for( var h = 0; h < skill.hitCount; h++){
 			for( var i = 0; i < target.length; i++){
 				for( var j = 0; j < target[i].length;j++){
 					if(target[i][j]>0){
@@ -430,22 +503,16 @@ function actionSkill(performer, skill, data, stock){ // 스킬 작동
 							if( criticalDice <= performer.critical){
 								damage *= 2;
 							}
-							if(skill.damageType != 0){
-								damage = calculateDefenseDamage(target[i][j],damage);
+							if(skill.skillType == 'combat'){
+								damage = Math.round(calculateDefenseDamage(target[i][j],damage));
+								target[i][j].now.hp -= damage;
 							}
-							if(skill.damageType == 0){ // 피해 종류 구분 용, 개선 필요함.
+							else if(skill.skillType == 'support'){ 
 	// 스킬 구분 combat - (melee,range)(physical,magic),support-(heal,barrier...등)(bless,curse..등)으로 구분 하여 스킬 효과를 판정
 								target[i][j].now.hp += damage;
 							}
-							else if(skill.damageType == 1){
-								target[i][j].now.hp -= damage;
-							}
-							else if(skill.damageType == 2){
-								target[i][j].now.mana -= damage;
-							}
-							else if(skill.damageType == 3){
-								target[i][j].now.stamina -= damage;
-							}
+
+
 						}
 					}
 				}
@@ -453,8 +520,9 @@ function actionSkill(performer, skill, data, stock){ // 스킬 작동
 		}
 	}
 	else if( skill.target[0] != 0 ){
-		for( var h = 0; h < skill.hitNumber; h++){
+		for( var h = 0; h < skill.hitCount; h++){
 			var hitTarget = selectTarget(skill,target);
+			if(hitTarget){
 			var hit = 0;
 			if( range[hitTarget[1][0]][hitTarget[1][1]] <= 1 ){ // 거리판정
 				hit = checkHit(performer,skill,hitTarget[0])
@@ -469,45 +537,38 @@ function actionSkill(performer, skill, data, stock){ // 스킬 작동
 				if( criticalDice <= performer.critical){
 					damage *= 2;
 				}
-				if(skill.damageType != 0){
-				damage = calculateDefenseDamage(hitTarget[0],damage);
+				if(skill.skillType == 'combat'){
+					damage = Math.round(calculateDefenseDamage(hitTarget[0],damage));
+					console.log( hitTarget[0].onName +'은(는)'+damage+'의 피해를 입었다. ('+ hitTarget[0].now.hp+ '>>' + ( hitTarget[0].now.hp - damage ) + ')');
+					hitTarget[0].now.hp -= damage;
 				}
-				if(skill.damageType == 0){
-				hitTarget[0].now.hp += damage;
+				else if(skill.skillType == 'support'){ 
+					hitTarget[0].now.hp += damage;
 				}
-				else if(skill.damageType == 1){
-				hitTarget[0].now.hp -= damage;
-				}
-				else if(skill.damageType == 2){
-				hitTarget[0].now.mana -= damage;
-				}
-				else if(skill.damageType == 3){
-				hitTarget[0].now.stamina -= damage;
-				}
+			}
 			}
 		}
 	}
 	else if( skill.target[0] == 0){
-		for( var h = 0; h < skill.hitNumber; h++){
+		for( var h = 0; h < skill.hitCount; h++){
 			damage = calculateSkillDamage(performer,skill);
 			var criticalDice = Math.random() * 100;
-			if( criticalDice <= performer.critical){
+			if( criticalDice <= performer.rate.critical){
 				damage *= 2;
 			}
 			if(skill.damageType != 0){
-			damage = calculateDefenseDamage(target[0][0],damage);
-			}
-			if(skill.damageType == 0){
-			target[0][0].now.hp += damage;
-			}
-			else if(skill.damageType == 1){
-			target[0][0].now.hp -= damage;
-			}
-			else if(skill.damageType == 2){
-			target[0][0].now.mana -= damage;
-			}
-			else if(skill.damageType == 3){
-			target[0][0].now.stamina -= damage;
+				damage = calculateSkillDamage(performer,skill);
+				var criticalDice = Math.random() * 100;
+				if( criticalDice <= performer.critical){
+					damage *= 2;
+				}
+				if(skill.skillType == 'combat'){
+					damage = Math.round(calculateDefenseDamage(hitTarget[0][0],damage));
+					hitTarget[0][0].now.hp -= damage;
+				}
+				else if(skill.skillType == 'support'){ 
+					hitTarget[0][0].now.hp += damage;
+				}
 			}
 		}
 	}
