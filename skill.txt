@@ -7,11 +7,15 @@
 
 	!name : 이름
 		출력될 이름
-
+		
 	!target : [ -, - ]
 		[ (0 = self, 1 = friend , 2 = enemy, 3 = all) , ( 0 = individual , 1= multi , 2 = all) ] 를 의미
 			개인	아군		적	전체		1인		다수	전체
 
+	!cost : { hp : - , mana : - , stamina : - }
+		스킬 발동을 위한 소모값, 해당 값이 비어있을 경우 0으로 인식함.
+		0이 아닌값만 출력함
+       
 	!delay : [ - , - ] or { first : - , last : - }
 		수치 미입력시 0, 0로 인식 first 0의 경우 선 딜레이 없음
 					       last 0의 경우 후 딜레이 없음( 게이지 최대값 + last 값 이 사용후 게이지 감소 값)
@@ -71,6 +75,7 @@
 	code : 100000
 	name : 'Attack'
 	target : [ 2, 1 ] // enemy - individual
+	cost : { hp : 0 , mana : 0 , stamina : 0 }
 	skillType : combat  // 공격기술
 	range : 1 // 사정거리 1
 	hitCount : 1 // 1회 타격
@@ -84,6 +89,7 @@ Attack / enemy - individual / 100% * 1(붉은색) / Range : 1 /  Physical / Comb
 	code : 200010 
 	name : 'QuickHeal'
 	target : [ 1, 2 ] // friend - multi
+	cost : { hp : 0 , mana : 30 , stamina : 0 }
 	delay : [ 3000 , -3000 ] // 3000의 선딜레이후 발동 , 발동후 7000의 딜레이만큼 감소
 	delayType : cast // 영창
 	skillType : support  // 회복기술
@@ -92,4 +98,4 @@ Attack / enemy - individual / 100% * 1(붉은색) / Range : 1 /  Physical / Comb
 	power : [['magicAttack' , 110]] //마법공격력의 110%
 	highestTarget : LowestNowHp // 현재  체력이 가장 낮은 것부터 판정함
 사용자에게 출력 양식 예상)
-QuickHeal / friend - multi / 110% * 3 (초록색) / (3000 : -3000) / Range : 0.8 / Support / Casting
+QuickHeal / friend - multi / 30 mana / 110% * 3 (초록색) / (3000 : -3000) / Range : 0.8 / Support / Casting
