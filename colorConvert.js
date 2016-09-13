@@ -1,3 +1,9 @@
+var player = {color : {
+	red : 60 , green : 128 , blue : 240, alpha : 0,
+	cyan : 0 , magenta : 0, yellow : 0, black : 0,
+	hue : 0 , saturation : 0, value : 0
+	}
+}
 function colorConvert(baseType){
 	var returnColor = {
 	red : 0 , green : 0 , blue : 0,
